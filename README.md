@@ -2,7 +2,7 @@
 
 Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写代码, 再到2015年github上开源以来, 已经吸引了9k+关, 以及很多大公司的使用; 2016年Prometheus成为继k8s后, 第二名CNCF(Cloud Native Computing Foundation)成员。
 
-## 基础架构
+## 主要功能
 
 - 多维数据模型(时序由 metric名字和k/v的labels构成)。
 - 灵活的查询语句(PromQL)。
