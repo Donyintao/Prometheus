@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    k8s-app: prometheus
+spec:
+  rules:
+  - host: prometheus.host.com
+    http:
+      paths:
+      - path: /
+        backend:
+          servicePort: 80
+          serviceName: prometheus 
