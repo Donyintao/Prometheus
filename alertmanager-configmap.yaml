@@ -1,0 +1,31 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager
+  namespace: monitoring
+data:
+  config.yml: |-
+    global:
+      resolve_timeout: 60m
+      smtp_smarthost: 'smtp.gmail.com:465'
+      smtp_from: 'k8s@ltj.com'
+      smtp_auth_username: 'k8s@ltj.com'
+      smtp_auth_password: 'k8s_passwd'
+
+    route:
+      group_by: ['alertname']
+      group_wait: 30s
+      group_interval: 1m
+      repeat_interval: 30m
+      receiver: Email_Alert
+
+    receivers:
+    - name: 'Email_Alert'
+      email_configs:
+      - to: 'user_two@ltj.com'
+        send_resolved: true 
+      - to: 'user_one@ltj.com'
+        send_resolved: true 
+      webhook_configs:
+      - send_resolved: true
+        url: 'http://alert.k8s.com/api/alert'
