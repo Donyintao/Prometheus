@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/alertmanager/metrics'
+  labels:
+    name: alertmanager
+  name: alertmanager
+  namespace: monitoring
+spec:
+  rules:
+  - host: alert.host.com
+    http:
+      paths:
+      - path: /
+        backend:
+          servicePort: 80
+          serviceName: alertmanager
