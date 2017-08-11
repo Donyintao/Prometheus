@@ -7,12 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: alertmanager
+      k8s-app: alertmanager
   template:
     metadata:
-      name: alertmanager
       labels:
-        app: alertmanager
+        k8s-app: alertmanager
     spec:
       containers:
       - name: alertmanager
@@ -47,16 +46,14 @@ kind: Service
 metadata:
   name: alertmanager
   namespace: monitoring
-  labels:
-    name: alertmanager
   annotations:
     prometheus.io/scrape: 'true'
-    prometheus.io/path: '/alertmanager/metrics'
+    prometheus.io/path: '/metrics'
 spec:
-  selector:
-    app: alertmanager
   ports:
   - name: alertmanager
     protocol: TCP
     port: 80
     targetPort: 9093
+  selector:
+    k8s-app: alertmanager
