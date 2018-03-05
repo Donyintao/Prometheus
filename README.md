@@ -35,6 +35,7 @@ kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/k
 4. 部署`node-directory-size-metrics`服务
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
+```
 
 5. 创建`prometheus`服务的`Service Account`, `ClusterRole`, `Role`,
 `ClusterRoleBinding`, and `RoleBinding`.
