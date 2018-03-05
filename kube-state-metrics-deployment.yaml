@@ -13,7 +13,10 @@ spec:
       serviceAccountName: kube-state-metrics
       containers:
       - name: kube-state-metrics
-        image: gcr.io/google_containers/kube-state-metrics:v0.5.0
+        image: quay.io/coreos/kube-state-metrics:v1.2.0
+        volumeMounts:
+          - name: localtime
+            mountPath: /etc/localtime
         ports:
         - name: http-metrics
           containerPort: 8080
@@ -25,12 +28,17 @@ spec:
           timeoutSeconds: 5
         resources:
           requests:
-            memory: 30Mi
+            memory: 100Mi
             cpu: 100m
           limits:
-            memory: 50Mi
-            cpu: 200m
+            memory: 500Mi
+            cpu: 300m
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
