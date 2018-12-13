@@ -17,28 +17,38 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 
 ## Install
 
-#### 创建`monitoring namespaece`空间
+#### 创建monitoring namespaece空间
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-namespace.yaml
 ```
 
-#### 部署`kube-state-metrics`服务(主要收集k8s服务metric信息)
+#### 部署kube-state-metrics服务
+
+说明： 主要用于收集k8s服务metric信息
+
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-rbac.yaml
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-deployment.yaml
 ```
 
-#### 部署`node-directory-size-metrics`服务(主要读取节点目录，获取磁盘使用metric数据)
+#### 部署node-directory-size-metrics服务
+
+说明： 主要用于读取节点目录，获取磁盘使用metric数据
+
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
 ```
 
-#### 部署`prometheus-node-exporter`服务(主要收集节点信息)
+#### 部署prometheus-node-exporter服务
+
+说明： 主要用于收集节点信息
+
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
 ```
 
-#### 部署`prometheus ingress`服务
+#### 部署prometheus ingress服务
+
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rbac.yaml
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-configmap.yaml
