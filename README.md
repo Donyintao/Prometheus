@@ -24,7 +24,7 @@ kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/p
 
 #### 部署kube-state-metrics服务
 
-说明： 主要用于收集k8s服务metric信息
+备注说明：主要用于收集k8s服务metric信息
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-rbac.yaml
@@ -33,7 +33,7 @@ kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/k
 
 #### 部署node-directory-size-metrics服务
 
-说明： 主要用于读取节点目录，获取磁盘使用metric数据
+备注说明：主要用于读取节点目录，获取磁盘使用metric数据
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
@@ -41,7 +41,7 @@ kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/n
 
 #### 部署prometheus-node-exporter服务
 
-说明： 主要用于收集节点信息
+备注说明：主要用于收集节点信息
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
@@ -55,3 +55,17 @@ kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/p
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-deployment.yaml
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-ingress.yaml
 ```
+## 验证Prometheus服务
+
+这时我们用浏览器访问`http://prometheus.host.com`来访问Prometheus的界面，查看已经搜集到的数据和Targets状态。
+
+![Prometheus](./images/prometheus-status.jpg)
+
+## 总结
+
+通过向Kubernetes集群内部署Prometheus，我们在不修改任何集群配置的状态下，利用Prometheus 的服务发现功能获得了基本的集群监控能力，并通过web界面对监控系统获取到的数据做了基本的查询。
+
+下面我们将进一步完善Prometheus的使用：
++ 增加更多的监控数据源
++ 使用Grafana图形化的展示搜集到的监控数据
++ 使用AlertManager实现异常提醒
