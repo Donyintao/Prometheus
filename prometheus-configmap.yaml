@@ -1,3 +1,4 @@
+# Prometheus configuration format https://prometheus.io/docs/prometheus/latest/configuration/configuration/
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,44 +10,14 @@ metadata:
 data:
   prometheus.yml: |
     global:
-      scrape_interval: 10s
-      scrape_timeout: 10s
-      evaluation_interval: 10s
-
+      scrape_interval: 60s
+      scrape_timeout: 60s
+      evaluation_interval: 60s
+      
     rule_files:
       - '/etc/prometheus-rules/*.rules'
 
     scrape_configs:
-      - job_name: 'ingress-nginx-endpoints'
-        tls_config:
-          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-        kubernetes_sd_configs:
-          - role: pod
-            namespaces:
-              names:
-              - ingress-nginx
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-            action: keep
-            regex: true
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scheme]
-            action: replace
-            target_label: __scheme__
-            regex: (https?)
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
-            action: replace
-            target_label: __metrics_path__
-            regex: (.+)
-          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-            action: replace
-            target_label: __address__
-            regex: ([^:]+)(?::\d+)?;(\d+)
-            replacement: $1:$2
-          - source_labels: [__meta_kubernetes_service_name]
-            regex: prometheus-server
-            action: drop
-
     - job_name: kubernetes-apiservers
       kubernetes_sd_configs:
       - role: endpoints
