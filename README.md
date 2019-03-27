@@ -17,37 +17,32 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 
 ## Install
 
-#### 创建monitoring namespaece空间
-```sh
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-namespace.yaml
-```
+#### Deployment kube-state-metrics
 
-#### 部署kube-state-metrics服务
-
-备注说明：主要用于收集k8s服务metric信息
+说明：主要用于收集k8s服务metric信息
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-rbac.yaml
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-deployment.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-rbac.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-deployment.yaml
 ```
 
-#### 部署node-directory-size-metrics服务
+#### Deployment node-directory-size-metrics
 
-备注说明：主要用于读取节点目录，获取磁盘使用metric数据
+说明：主要用于读取节点目录，获取磁盘使用metric数据
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
 ```
 
-#### 部署prometheus-node-exporter服务
+#### Deployment prometheus-node-exporter
 
-备注说明：主要用于收集节点信息
+说明：主要用于收集节点信息
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
 ```
 
-#### 部署prometheus ingress服务
+#### Deployment prometheus service
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rbac.yaml
