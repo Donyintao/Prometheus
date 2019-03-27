@@ -45,10 +45,10 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 #### Deployment prometheus service
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rbac.yaml
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-configmap.yaml
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-deployment.yaml
-kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-ingress.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rbac.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-configmap.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-deployment.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-ingress.yaml
 ```
 ## 验证Prometheus服务
 
