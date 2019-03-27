@@ -1,8 +1,8 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-state-metrics
-  namespace: monitoring
+  namespace: kube-system
   labels:
     k8s-app: kube-state-metrics
     kubernetes.io/cluster-service: "true"
@@ -27,9 +27,6 @@ spec:
       containers:
       - name: kube-state-metrics
         image: quay.io/coreos/kube-state-metrics:v1.3.0
-        volumeMounts:
-          - name: localtime
-            mountPath: /etc/localtime
         ports:
         - name: http-metrics
           containerPort: 8080
@@ -62,8 +59,6 @@ spec:
         volumeMounts:
           - name: config-volume
             mountPath: /etc/config
-          - name: localtime
-            mountPath: /etc/localtime  
         command:
           - /pod_nanny
           - --config-dir=/etc/config
@@ -78,15 +73,13 @@ spec:
         - name: config-volume
           configMap:
             name: kube-state-metrics-config
-        - name: localtime
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Shanghai
 ---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kube-state-metrics-config
-  namespace: monitoring
+  namespace: kube-system
   labels:
     k8s-app: kube-state-metrics
     kubernetes.io/cluster-service: "true"
@@ -95,8 +88,8 @@ data:
   NannyConfiguration: |-
     apiVersion: nannyconfig/v1alpha1
     kind: NannyConfiguration
-
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
