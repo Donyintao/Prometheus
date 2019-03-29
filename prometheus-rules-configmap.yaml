@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules
+  namespace: kube-system 
+data:
+  prometheus.rules: |
+    groups:
+    - name: prometheus-rules
+      rules:
+      - alert: Container_Memory_RSS
+        expr: ((sum by(pod_name) (container_memory_rss{job="kubernetes-cadvisor",pod_name!=""}))
+          / (sum by(pod_name) (container_spec_memory_limit_bytes{job="kubernetes-cadvisor",pod_name!=""}))
+          * 100) > 95
+        for: 1m
+        labels:
+          severity: '剩余内存: {{ $value }}'
+        annotations:
+          description: '使用内存高于 95%. 使用内存: {{ $value }}'
+          summary: '检测内存使用率过高.'
+
+      - alert: Container_Network_RX_Average
+        expr: ((sum by(pod_name) (rate(container_network_receive_bytes_total{job="kubernetes-nodes",pod_name!=""}[1m])))
+          / 1024) > 102400
+        for: 1m
+        labels:
+          severity: 'RX带宽使用率: {{ $value }}'
+        annotations:
+          description: '网络带宽使用高于 100M. RX带宽使用率: {{ $value }}'
+          summary: '检测网络带宽使用率过高.'
+
+      - alert: Container_Network_TX_Average
+        expr: ((sum by(pod_name) (rate(container_network_transmit_bytes_total{job="kubernetes-nodes",pod_name!=""}[1m])))
+          / 1024) > 102400
+        for: 1m
+        labels:
+          severity: 'TX带宽使用率: {{ $value }}'
+        annotations:
+          description: '网络带宽使用高于 100M. TX带宽使用率: {{ $value }}'
+          summary: '检测网络带宽使用率过高.'
+
+      - alert: Container_USAGE_CPU_Average
+        expr: ((sum by(pod_name) (rate(container_cpu_usage_seconds_total{image!="",job="kubernetes-nodes",pod_name!=""}[1m])))
+          * 100) > 95
+        for: 1m
+        labels:
+          severity: 'CPU使用率: {{ $value }}'
+        annotations:
+          description: 'CPU使用高于 95%. CPU使用率: {{ $value }}'
+          summary: '检测CPU使用率过高.'
