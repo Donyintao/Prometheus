@@ -34,12 +34,17 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/prometheus
+        - name: rules-volume
+          mountPath: /etc/prometheus-rules
         - name: tz-config
           mountPath: /etc/localtime
       volumes:
       - name: config-volume
         configMap:
           name: prometheus
+      - name: rules-volume
+        configMap:
+          name: prometheus-rules
       - name: tz-config
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
