@@ -13,7 +13,7 @@ data:
       scrape_interval: 60s
       scrape_timeout: 60s
       evaluation_interval: 60s
-      
+
     rule_files:
       - '/etc/prometheus-rules/*.rules'
 
@@ -155,6 +155,7 @@ data:
         source_labels:
         - __meta_kubernetes_pod_name
         target_label: kubernetes_pod_name
+        
     alerting:
       alertmanagers:
       - kubernetes_sd_configs:
