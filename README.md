@@ -52,9 +52,11 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 ```
 ## 验证Prometheus服务
 
-这时我们用浏览器访问`http://prometheus.host.com`来访问Prometheus的界面，查看已经搜集到的数据和Targets状态。
+通过域名`http://prometheus.host.com`来访问Prometheus的界面，查看已经搜集到的数据和Targets状态以及报警规则等信息。
 
 ![Prometheus](./images/prometheus-status.jpg)
+![Prometheus](./images/prometheus-rules.jpg)
+![Prometheus](./images/prometheus-alerts.jpg)
 
 ## 总结
 
