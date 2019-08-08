@@ -19,26 +19,23 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 
 #### Deployment kube-state-metrics
 
-说明：主要用于收集k8s服务metric信息
-
 ```sh
+# 说明: 主要用于收集k8s服务metric信息
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-rbac.yaml
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/kube-state-metrics-deployment.yaml
 ```
 
 #### Deployment node-directory-size-metrics
 
-说明：主要用于读取节点目录，获取磁盘使用metric数据
-
 ```sh
+# 说明: 主要用于读取节点目录，获取磁盘使用metric数据
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/node-directory-size-metrics.yaml
 ```
 
 #### Deployment prometheus-node-exporter
 
-说明：主要用于收集节点信息
-
 ```sh
+# 说明: 主要用于收集节点信息
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
 ```
 
@@ -47,9 +44,16 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 ```sh
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rbac.yaml
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-configmap.yaml
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-rules-configmap.yaml
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-deployment.yaml
+```
+
+#### Deployment prometheus ingress
+
+```sh
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-ingress.yaml
 ```
+
 ## 验证Prometheus服务
 
 通过域名`http://prometheus.host.com`来访问Prometheus的界面，查看已经搜集到的数据和Targets状态以及报警规则等信息。
