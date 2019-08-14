@@ -36,6 +36,7 @@ Prometheus是由SoundCloud开源监控告警解决方案, 从2012年开始编写
 
 ```sh
 # 说明: 主要用于收集节点信息
+# kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter-rbac.yaml
 # kubectl apply -f https://raw.githubusercontent.com/Donyintao/Prometheus/master/prometheus-node-exporter.yaml
 ```
 
